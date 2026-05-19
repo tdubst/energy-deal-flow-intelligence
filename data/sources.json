@@ -1,0 +1,59 @@
+{
+  "default_area": "fort_bend",
+  "areas_of_interest": {
+    "fort_bend": {
+      "name": "Avalon BESS / Fort Bend County MVP",
+      "bbox_wgs84": [-96.2, 29.2, -95.3, 30.2],
+      "flood_bbox_wgs84": [-95.72, 29.42, -95.54, 29.56],
+      "notes": "Bounding box is intentionally broad for the first raw overlay pull around Fort Bend County and Houston west demand corridors."
+    },
+    "texas": {
+      "name": "Texas Statewide Infrastructure View",
+      "bbox_wgs84": [-106.8, 25.6, -93.6, 36.4],
+      "notes": "Statewide view is appropriate for ERCOT queue, HIFLD transmission, EIA/FERC assets, and demand hubs. Parcel coverage should remain county-specific unless a licensed statewide parcel source is added."
+    }
+  },
+  "sources": [
+    {
+      "id": "fbcad_2025_certified_parcels_shapes",
+      "name": "Fort Bend CAD 2025 Certified GIS Data - Parcels and Shapefiles",
+      "type": "zip",
+      "url": "https://www.fbcad.org/wp-content/uploads/2025/07/FBCAD-2025-Certified-GIS-Data-Parcels-and-Shapefiles.zip",
+      "raw_path": "data/raw/FBCAD-2025-Certified-GIS-Data-Parcels-and-Shapefiles.zip",
+      "areas": ["fort_bend"],
+      "license_or_disclaimer": "Provided as-is by Fort Bend Central Appraisal District. Confidential owner/situs information is restricted under Texas Property Tax Code Sec. 25.025.",
+      "use": "Parcel acreage, shape, ownership fragmentation screening where fields are legally usable."
+    },
+    {
+      "id": "fbcad_2025_certified_shapes_only",
+      "name": "Fort Bend CAD 2025 Certified GIS Data - Shapefiles Only",
+      "type": "zip",
+      "url": "https://www.fbcad.org/wp-content/uploads/2025/07/FBCAD-2025-Certified-GIS-Data-Shapefiles-Only.zip",
+      "raw_path": "data/raw/FBCAD-2025-Certified-GIS-Data-Shapefiles-Only.zip",
+      "areas": ["fort_bend"],
+      "license_or_disclaimer": "Provided as-is by Fort Bend Central Appraisal District.",
+      "use": "Fallback parcel geometry if parcel attributes need separate handling."
+    },
+    {
+      "id": "hifld_transmission_lines",
+      "name": "HIFLD US Electric Power Transmission Lines",
+      "type": "arcgis_feature_service",
+      "url": "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/ArcGIS/rest/services/HIFLD_US_Electric_Power_Transmission_Lines/FeatureServer/0",
+      "raw_path": "data/raw/{area}/hifld_transmission.geojson",
+      "areas": ["fort_bend", "texas"],
+      "license_or_disclaimer": "HIFLD/ORNL/LANL/INL/NGA source. Informational only; approximate locations; not legal, engineering, or survey-grade.",
+      "use": "Transmission proximity and voltage context."
+    },
+    {
+      "id": "fema_nfhl_flood_hazard_zones",
+      "name": "FEMA NFHL Flood Hazard Zones",
+      "type": "arcgis_map_service",
+      "url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+      "raw_path": "data/raw/{area}/fema_nfhl_flood_hazard_zones.geojson",
+      "areas": ["fort_bend"],
+      "out_fields": "FLD_ZONE,ZONE_SUBTY,SFHA_TF",
+      "license_or_disclaimer": "FEMA NFHL effective flood data. Use with appropriate care; map accuracy matters for official NFIP purposes.",
+      "use": "Flood/buildability screening."
+    }
+  ]
+}

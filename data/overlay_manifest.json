@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-05-13T21:44:50.080Z",
+  "standard": "Raw public source -> processed overlay JSON -> frontend runtime fetch",
+  "overlays": [
+    {
+      "file": "public/overlays/fema-flood-zones.json",
+      "source_name": "FEMA NFHL Flood Hazard Zones",
+      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query",
+      "license_notes": "Public FEMA NFHL service; confirm downstream terms before commercial redistribution.",
+      "corridors": ["Fort Bend", "Navarro / Corsicana"],
+      "refresh_command": "node scripts/build_client_ready_overlays.mjs"
+    },
+    {
+      "file": "public/overlays/navarro-parcels.json",
+      "source_name": "Navarro CAD Parcels FeatureServer",
+      "source_url": "https://utility.arcgis.com/usrsvcs/servers/ffae28fe951a4349abca4e107f0fa39a/rest/services/NavarroCADWebService/FeatureServer/0/query",
+      "license_notes": "Public CAD GIS service; confirm county terms before commercial redistribution.",
+      "corridors": ["Navarro / Corsicana"],
+      "refresh_command": "node scripts/build_client_ready_overlays.mjs"
+    },
+    {
+      "file": "public/overlays/fort-bend-parcels.json",
+      "source_name": "Fort Bend CAD GIS parcel shapefile",
+      "source_url": "Local raw archive: data/raw/FBCAD-2025-Certified-GIS-Data-Parcels-and-Shapefiles.zip",
+      "license_notes": "Public county GIS extract; confirm county terms before commercial redistribution.",
+      "corridors": ["Fort Bend"],
+      "refresh_command": "node scripts/build_fort_bend_parcels_overlay.js"
+    },
+    {
+      "file": "public/overlays/texas-transmission.json",
+      "source_name": "HIFLD transmission lines",
+      "source_url": "Local raw archive: data/raw/texas/hifld_transmission.geojson",
+      "license_notes": "HIFLD public infrastructure dataset; preserve fetch date and source URL in future refreshes.",
+      "corridors": ["Texas statewide context"],
+      "refresh_command": "node scripts/build_transmission_overlay.js"
+    }
+  ]
+}

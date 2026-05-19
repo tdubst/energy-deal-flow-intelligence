@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Local environment and deployment metadata
+.env
+.env.*
+.vercel/
+
+# Logs and OS/editor files
+*.log
+.DS_Store
+
+# Local generated backups
+*.bak
+*_backup_*/
+node_modules/
+dist/
+.vercel/
+.env*
+*.mov
+*.zip
+*.bak
+data/raw/
+data/raw/
+node_modules/
+dist/
+.vercel/
+.env*
+*.zip
+*.mov
+*.bak
