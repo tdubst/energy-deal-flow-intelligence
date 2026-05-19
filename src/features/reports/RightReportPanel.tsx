@@ -50,7 +50,8 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
       </header>
 
       <PanelCard className="executive-card">
-        <SectionHeader eyebrow="Executive Summary" title="Infrastructure Signal" />
+        <SectionHeader eyebrow="Executive Summary" title="Pre-Headline Deal Signal" />
+        <p className="report-thesis-line">Battery tells you where. Ownership tells you whether you can close.</p>
         <p>{opportunity.thesis}</p>
         <div className="report-brief-grid">
           <div>
@@ -63,17 +64,25 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
           </div>
           <div>
             <span>Client Action</span>
-            <strong>Prioritize land-control diligence before headline demand reprices the corridor.</strong>
+            <strong>Verify owner, confirm POI, begin outreach sequencing.</strong>
+          </div>
+          <div>
+            <span>Why This Corridor Matters Now</span>
+            <strong>BESS/storage activity is exposing transmission-backed land optionality before headline demand reprices the corridor.</strong>
           </div>
         </div>
         <div className="report-thesis-stack">
           <div>
             <span className="eyebrow">Investment Thesis</span>
-            <p>{opportunity.leadIndicator}; convert queue intelligence into land-control diligence before the broader market prices the corridor.</p>
+            <p>{opportunity.leadIndicator}; convert queue intelligence into owner-verified land-control diligence before the broader market prices the corridor.</p>
+          </div>
+          <div>
+            <span className="eyebrow">Next Action</span>
+            <p>Verify owner, confirm POI, begin outreach sequencing.</p>
           </div>
           <div>
             <span className="eyebrow">Data Confidence</span>
-            <p>{sourceNames.length ? sourceNames.join(" + ") : "Source-backed parcel overlay"} with HIFLD transmission context and FEMA NFHL flood screening.</p>
+            <p>{sourceNames.length ? sourceNames.join(" + ") : "Source-backed parcel overlay"} with HIFLD 230kV+ transmission context, FEMA NFHL flood screening, and owner/entity enrichment.</p>
           </div>
         </div>
         <div className="report-metrics">
@@ -89,6 +98,11 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
         {open.narrative ? (
           <div className="accordion-body">
             <p>{project.narrative}</p>
+            <div className="workflow-row">
+              <span>Why this corridor matters now</span>
+              <strong>Pre-headline signal plus transmission-proven siting context.</strong>
+              <small>Battery/storage activity identifies the corridor; parcel and ownership screens identify whether there is a diligence-ready path.</small>
+            </div>
             <ul>
               {opportunity.nextActions.map((action) => <li key={action}>{action}</li>)}
             </ul>
@@ -109,10 +123,10 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
                     <span>{parcel.owner ?? owner?.owner ?? "Owner enrichment pending"}</span>
                   </div>
                   <ScorePill value={parcel.score} />
-                  <small>{parcel.acres.toFixed(0)} ac · {parcel.nearest345Miles.toFixed(2)} mi to 345kV · {formatMoney(parcel.screeningUpsideBaseM)} · {parcel.sourceName ?? "source-backed"}</small>
+                  <small>{parcel.acres.toFixed(0)} ac · {parcel.nearest345Miles.toFixed(2)} mi to 345kV · {formatMoney(parcel.screeningUpsideBaseM)} · owner path: {parcel.ownerBucket.replaceAll("_", " ")} · {parcel.sourceName ?? "source-backed"}</small>
                   <div className="parcel-report-actions">
                     <Badge tone={parcel.floodRisk === "high" ? "risk" : parcel.floodRisk === "moderate" ? "warn" : "good"}>{parcel.floodRisk} flood</Badge>
-                    <button className="ghost-button" onClick={() => addParcelToQueue(parcel)}>Add to Queue</button>
+                    <button className="ghost-button" onClick={() => addParcelToQueue(parcel)}>Add to Diligence</button>
                   </div>
                 </article>
               );
@@ -130,13 +144,13 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
               <div className="workflow-row" key={risk}>
                 <span>Risk</span>
                 <strong>{risk}</strong>
-                <small>Mitigation: validate through source refresh, owner outreach, and interconnection milestone monitoring.</small>
+                <small>Mitigation: validate through source refresh, POI confirmation, owner outreach, and interconnection milestone monitoring.</small>
               </div>
             ))}
             <div className="workflow-row">
               <span>Evidence Standard</span>
               <strong>Separate sourced facts from investment thesis.</strong>
-              <small>Reports should identify source-backed overlay facts, inferred opportunity logic, and remaining diligence questions.</small>
+              <small>Reports distinguish source-backed overlay facts, inferred opportunity logic, ownership assumptions, and remaining diligence questions.</small>
             </div>
           </div>
         ) : null}

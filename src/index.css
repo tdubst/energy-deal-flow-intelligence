@@ -206,6 +206,8 @@ li {
 }
 
 .opportunity-list,
+.intro-card,
+.deal-stack-card,
 .demo-path-card,
 .layer-controls,
 .diligence-queue {
@@ -214,10 +216,61 @@ li {
   gap: 10px;
 }
 
+.intro-card,
+.deal-stack-card,
 .demo-path-card {
   padding: 12px;
   border: 1px solid rgba(45, 212, 191, 0.18);
   background: rgba(20, 184, 166, 0.07);
+}
+
+.intro-card h2 {
+  color: #f8fafc;
+  font-size: 17px;
+  line-height: 1.18;
+  text-transform: none;
+}
+
+.intro-card p,
+.queue-helper,
+.report-thesis-line {
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.intro-metrics,
+.intro-proof-grid,
+.deal-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.intro-metrics span,
+.intro-proof-grid span,
+.deal-stack-grid span {
+  display: grid;
+  gap: 2px;
+  min-height: 48px;
+  padding: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.13);
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.38);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.intro-metrics strong,
+.intro-proof-grid strong,
+.deal-stack-grid strong {
+  color: #f8fafc;
+  font-size: 13px;
+}
+
+.deal-stack-card {
+  border-color: rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.055);
 }
 
 .demo-path-card ol {
@@ -452,6 +505,12 @@ textarea {
 
 .map-toolbar h1 {
   font-size: 20px;
+}
+
+.map-toolbar p {
+  margin-top: 4px;
+  color: #cbd5e1;
+  font-size: 12px;
 }
 
 .map-footer {
@@ -782,6 +841,40 @@ textarea {
   line-height: 1.4;
 }
 
+.map-intro-panel {
+  position: absolute;
+  z-index: 6;
+  left: clamp(18px, 5vw, 64px);
+  top: 112px;
+  width: min(430px, calc(100% - 36px));
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  background: linear-gradient(180deg, rgba(4, 12, 17, 0.86), rgba(4, 12, 17, 0.68));
+  backdrop-filter: blur(18px) saturate(1.22);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(248, 250, 252, 0.05);
+}
+
+.map-intro-panel h2 {
+  color: #f8fafc;
+  font-size: 24px;
+  line-height: 1.05;
+  text-transform: none;
+}
+
+.map-intro-panel p {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.map-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .demo-flow-panel {
   position: absolute;
   z-index: 5;
@@ -901,6 +994,15 @@ textarea {
   padding: 10px;
   border-left: 2px solid rgba(20, 241, 178, 0.62);
   background: rgba(20, 184, 166, 0.08);
+}
+
+.insight-action-line {
+  border-left-color: rgba(245, 158, 11, 0.72);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.insight-action-line span {
+  color: #fbbf24;
 }
 
 .insight-why span {

@@ -14,25 +14,50 @@ export const LeftSidebar = ({ store }: { store: DealFlowStore }) => {
         <span className="brand-mark">EDFI</span>
         <div>
           <h1>Energy Deal Flow Intelligence</h1>
-          <p>Pre-headline ERCOT infrastructure signals</p>
+          <p>Battery tells you where. Ownership tells you whether you can close.</p>
         </div>
       </header>
+
+      <section className="intro-card">
+        <span className="eyebrow">Live demo thesis</span>
+        <h2>Find pre-headline infrastructure opportunities before the market sees them.</h2>
+        <p>Signal {"->"} Corridor {"->"} Parcel {"->"} Ownership {"->"} Action.</p>
+        <div className="intro-metrics">
+          <span><strong>2</strong> corridors analyzed</span>
+          <span><strong>170</strong> parcels screened</span>
+          <span><strong>345kV</strong> transmission proximity</span>
+          <span><strong>FEMA</strong> flood risk</span>
+        </div>
+        <button className="primary-button" onClick={() => store.setInsightMode(true)}>Start Insight Mode</button>
+      </section>
 
       <section className="summary-grid">
         <MetricBlock label="Active corridors" value={String(opportunities.length)} />
         <MetricBlock label="Primary signal" value={formatMw(project.mw)} tone="good" />
         <MetricBlock label="Screened value" value={formatMoney(opportunities.reduce((sum, item) => sum + item.valueCreationM, 0))} tone="warn" />
-        <MetricBlock label="Workflow state" value="Local MVP" />
+        <MetricBlock label="Workflow output" value="Diligence-ready" />
+      </section>
+
+      <section className="deal-stack-card">
+        <SectionHeader eyebrow="Signal stack" title="From Map Signal to Close Path" />
+        <div className="deal-stack-grid">
+          <span>Corridors tracked <strong>2</strong></span>
+          <span>Parcels screened <strong>170</strong></span>
+          <span>Flood overlay <strong>FEMA NFHL</strong></span>
+          <span>Transmission context <strong>HIFLD 230kV+</strong></span>
+          <span>Queue signal <strong>BESS / storage</strong></span>
+          <span>Workflow output <strong>Parcel list</strong></span>
+        </div>
       </section>
 
       <section className="demo-path-card">
         <SectionHeader eyebrow="5-minute demo" title="Recommended Flow" />
         <ol>
-          <li>Start with Fit Texas for statewide grid context.</li>
-          <li>Fit Fort Bend, then show transmission and BESS signal.</li>
-          <li>Use Parcels to reveal owner, score, acreage, and upside.</li>
-          <li>Add a parcel to the diligence queue from the report.</li>
-          <li>Switch to Navarro, prove repeatability, then Fit All.</li>
+          <li>Start with Texas electrification context.</li>
+          <li>Show BESS as the pre-headline signal.</li>
+          <li>Validate the 345kV corridor and narrow to parcels.</li>
+          <li>Reveal ownership, score, acreage, flood risk, and upside.</li>
+          <li>Move the best parcel into the diligence queue for outreach.</li>
         </ol>
       </section>
 
@@ -50,6 +75,7 @@ export const LeftSidebar = ({ store }: { store: DealFlowStore }) => {
             </div>
             <ScorePill value={opportunity.score} />
             <p>{opportunity.leadIndicator}</p>
+            <small>Signal {"->"} Corridor {"->"} Parcel {"->"} Ownership {"->"} Action</small>
             <div className="opportunity-meta">
               <Badge tone="good">{formatMoney(opportunity.valueCreationM)}</Badge>
               <Badge>{opportunity.timelineMonths} mo</Badge>

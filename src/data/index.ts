@@ -15,7 +15,7 @@ export const queueProjects: QueueProject[] = [
     coordinates: [-95.71, 29.55],
     score: 91,
     narrative:
-      "Battery storage signal points to load-serving optionality west of Houston before the data-center headline appears.",
+      "Pre-headline battery storage signal points to where load-serving infrastructure may matter next; owner/entity enrichment shows whether the opportunity can actually close.",
   },
   {
     id: "navarro-bess",
@@ -31,7 +31,7 @@ export const queueProjects: QueueProject[] = [
     coordinates: [-96.47, 32.09],
     score: 84,
     narrative:
-      "A repeatable ERCOT signal: storage queue density near 345kV infrastructure and growing Dallas load pressure.",
+      "A repeatable ERCOT signal: storage queue density near 345kV infrastructure, then parcel and ownership screens to separate map interest from executable deal flow.",
   },
   {
     id: "houston-load",
@@ -47,7 +47,7 @@ export const queueProjects: QueueProject[] = [
     coordinates: [-95.64, 29.62],
     score: 78,
     narrative:
-      "Potential offtake pull-through: private load growth increases the value of controlled land near transmission.",
+      "Potential offtake pull-through: private load growth increases the value of controlled land near transmission when ownership can be verified and sequenced.",
   },
 ];
 
@@ -58,15 +58,15 @@ export const opportunities: Opportunity[] = [
     corridor: "Houston west 345kV corridor",
     geography: "Fort Bend County, Texas",
     thesis:
-      "BESS interconnection timing plus large, developable parcels creates a pre-headline land control opportunity for private power and data-center siting.",
+      "Battery tells you where; ownership tells you whether you can close. Fort Bend combines a BESS lead signal, 345kV proximity, screened parcels, and owner/entity diligence into a pre-headline land-control opportunity.",
     primaryProjectId: "avalon-bess",
     parcelIds: ["fbcad_118604", "fbcad_123498", "fbcad_120679", "fbcad_120657"],
     score: 91,
     valueCreationM: 55,
-    leadIndicator: "BESS as 24-36 month demand indicator",
+    leadIndicator: "Pre-headline BESS signal near 345kV backbone",
     timelineMonths: 33,
     risks: ["Flood overlap", "Owner fragmentation", "Speculative load timing"],
-    nextActions: ["Verify owner contacts", "Screen substation deliverability", "Package outreach memo"],
+    nextActions: ["Verify owner/entity contacts", "Confirm POI and deliverability", "Begin outreach sequencing"],
   },
   {
     id: "navarro-corsicana-corridor",
@@ -74,15 +74,15 @@ export const opportunities: Opportunity[] = [
     corridor: "Dallas south 345kV corridor",
     geography: "Navarro County, Texas",
     thesis:
-      "Storage queue density south of Dallas suggests a repeatable corridor screen for land assembly, future load interconnection, and private-power development.",
+      "Battery tells you where; ownership tells you whether you can close. Navarro proves the repeatable screen: BESS clustering, transmission-proven corridor context, parcel narrowing, and owner verification for a diligence-ready path.",
     primaryProjectId: "navarro-bess",
     parcelIds: ["navcad_37124", "navcad_50605", "navcad_44740", "navcad_45946"],
     score: 84,
     valueCreationM: 27,
-    leadIndicator: "Queue clustering near 345kV backbone",
+    leadIndicator: "Transmission-proven storage corridor signal",
     timelineMonths: 30,
     risks: ["Early queue attrition", "Owner outreach sequencing", "Local permitting uncertainty"],
-    nextActions: ["Verify top four owners", "Screen substations and deliverability", "Monitor IA execution dates"],
+    nextActions: ["Verify top owner entities", "Confirm POI and deliverability", "Begin outreach sequencing"],
   },
 ];
 
@@ -145,7 +145,7 @@ export const layerDefaults: LayerSetting[] = [
     group: "Infrastructure",
     enabled: true,
     opacity: 0.74,
-    description: "Texas 230kV+ lines, lazy-loaded from public overlay JSON.",
+    description: "HIFLD 230kV+ context used to validate transmission-proven corridors.",
   },
   {
     id: "flows",
@@ -153,7 +153,7 @@ export const layerDefaults: LayerSetting[] = [
     group: "Infrastructure",
     enabled: true,
     opacity: 0.82,
-    description: "Animated directional signal between storage and potential load centers.",
+    description: "Signal-to-corridor flow between BESS markers and potential load centers.",
   },
   {
     id: "projects",
@@ -161,7 +161,7 @@ export const layerDefaults: LayerSetting[] = [
     group: "Opportunity",
     enabled: true,
     opacity: 0.95,
-    description: "BESS/load signals used to seed diligence corridors.",
+    description: "BESS/storage queue signals used to seed pre-headline diligence corridors.",
   },
   {
     id: "parcels",
@@ -169,7 +169,7 @@ export const layerDefaults: LayerSetting[] = [
     group: "Development",
     enabled: true,
     opacity: 0.76,
-    description: "Large screened Fort Bend parcels with buildability and upside estimates.",
+    description: "Screened parcel universe with owner/entity, acreage, buildability, and upside signals.",
   },
   {
     id: "flood",
@@ -177,7 +177,7 @@ export const layerDefaults: LayerSetting[] = [
     group: "Risk",
     enabled: true,
     opacity: 0.48,
-    description: "Direct FEMA NFHL flood hazard zones fetched from FEMA ArcGIS services.",
+    description: "FEMA NFHL flood overlays used to narrow the executable parcel list.",
   },
 ];
 
@@ -192,7 +192,7 @@ export const diligenceDefaults: DiligenceItem[] = [
     score: 91,
     readiness: 78,
     pinned: true,
-    notes: "Confirm disposition authority and adjacent easement constraints.",
+    notes: "Confirm disposition authority, POI proximity, and adjacent easement constraints.",
     riskFlags: ["Flood screen", "Public process"],
   },
   {
@@ -205,7 +205,7 @@ export const diligenceDefaults: DiligenceItem[] = [
     score: 86,
     readiness: 86,
     pinned: true,
-    notes: "Prepare thesis memo around grid proximity, conservation sensitivities, and optionality.",
+    notes: "Prepare outreach memo around grid proximity, conservation sensitivities, and optionality.",
     riskFlags: ["Mission fit", "Assembly"],
   },
   {
@@ -231,7 +231,7 @@ export const diligenceDefaults: DiligenceItem[] = [
     score: 94,
     readiness: 68,
     pinned: true,
-    notes: "Large Navarro tract near 345kV backbone; verify decision maker and adjacent holdings.",
+    notes: "Large Navarro tract near 345kV backbone; verify decision maker, entity control, and adjacent holdings.",
     riskFlags: ["Owner contact", "Queue timing"],
   },
   {
@@ -244,7 +244,7 @@ export const diligenceDefaults: DiligenceItem[] = [
     score: 88,
     readiness: 72,
     pinned: false,
-    notes: "Validate whether private load growth changes storage-to-load optionality around Corsicana.",
+    notes: "Validate whether private load growth changes storage-to-load optionality and owner outreach priority around Corsicana.",
     riskFlags: ["Load confirmation", "Speculative demand"],
   },
 ];

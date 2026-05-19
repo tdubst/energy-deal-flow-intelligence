@@ -20,10 +20,11 @@ export const DiligenceQueue = ({ store }: { store: DealFlowStore }) => {
   return (
     <section className="diligence-queue">
       <SectionHeader
-        eyebrow="Workflow"
+        eyebrow="Execution handoff"
         title="Diligence Queue"
         action={<button className="ghost-button" onClick={() => exportDiligenceQueue(store.diligenceItems)}>Export</button>}
       />
+      <p className="queue-helper">Convert map intelligence into tracked owner/outreach actions.</p>
       <div className="queue-toolbar">
         <select value={store.queueFilter} onChange={(event) => store.setQueueFilter(event.target.value as DiligenceStatus | "All")}>
           {statuses.map((status) => <option key={status}>{status}</option>)}

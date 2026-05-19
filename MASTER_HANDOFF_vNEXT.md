@@ -13,7 +13,28 @@ MapLibre uses a dark CARTO/OpenStreetMap raster basemap for muted roads, labels,
 - `data/overlay_manifest.json`: source tracking file for generated overlays, source URLs, license notes, and refresh commands.
 
 ## Workflow Improvements
-The diligence queue supports status filtering, priority/score/readiness sorting, pinned watchlist items, editable notes, readiness indicators, risk badges, and CSV export. Navarro now has queue parity with Fort Bend through owner verification and load-adjacency tasks. This remains frontend/local-state only.
+The diligence queue is now positioned as the execution handoff from map intelligence to owner/outreach action. It supports status filtering, priority/score/readiness sorting, pinned watchlist items, editable notes, readiness indicators, risk badges, and CSV export. The visible workflow stages are Signal Detected, Screened, Ownership Verified, Outreach Ready, and Active Diligence. Navarro has queue parity with Fort Bend through owner verification and load-adjacency tasks. This remains frontend/local-state only.
+
+## Refined Demo Positioning
+The demo is now framed around the thesis: "Battery tells you where. Ownership tells you whether you can close."
+
+The core product narrative is explicit across the intro, Insight Mode, corridor cards, report panel, and diligence queue:
+
+Signal -> Corridor -> Parcel -> Ownership -> Action
+
+The commercial message is targeted at infrastructure investors, data-center developers, land brokers, and energy developers. The app should read as pre-headline infrastructure deal intelligence, not generic GIS or a consumer SaaS dashboard.
+
+## Live Demo Intro
+The map now opens with a lightweight premium intro panel:
+- "Find pre-headline infrastructure opportunities before the market sees them."
+- 2 corridors analyzed.
+- 170 parcels screened.
+- 345kV transmission proximity.
+- FEMA flood risk.
+- Owner/entity enrichment.
+- Diligence queue workflow.
+
+Primary CTAs are "Start Insight Mode" and "Explore the Battery Tell." The left rail also includes a compact Signal Stack / Deal Stack card so a viewer can understand the product in under 60 seconds.
 
 ## Second Corridor Summary
 Navarro / Corsicana is now a complete second ERCOT corridor example with live CAD parcel candidates, owner/entity enrichment from parcel attributes, FEMA flood overlay support, HIFLD transmission context, score parity, report parity, and queue parity. It demonstrates repeatability beyond the Fort Bend demo.
@@ -59,23 +80,24 @@ Production build passes and local preview loads at `http://127.0.0.1:4174/`. Bro
 
 ## Demo Flow
 Use this sequence for a 5-minute client demo:
-1. Start with Fit Texas to establish statewide infrastructure context.
-2. Fit Fort Bend and show the BESS plus transmission signal.
-3. Use Parcels to reveal owner, acreage, score, flood/buildability, and upside.
-4. Open the report panel and explain the client action, thesis, data confidence, and parcel screen.
-5. Add a parcel to the diligence queue to show workflow handoff.
-6. Switch to Navarro/Corsicana to prove repeatability.
-7. Return to Fit All to show the two-corridor portfolio view.
+1. Start with the intro panel and state the thesis: battery tells you where; ownership tells you whether you can close.
+2. Start Insight Mode to show Texas electrification context.
+3. Use BESS/storage as the pre-headline signal.
+4. Validate the 345kV corridor before parcel work.
+5. Narrow to the screened parcel universe with acreage, flood risk, score, and upside.
+6. Show ownership/entity enrichment and the diligence queue as the executable deal path.
+7. Switch to Navarro/Corsicana to prove repeatability.
+8. Return to Fit All to show the two-corridor portfolio view.
 
 ## Insight Mode Narrative Layer
 Insight Mode is a lightweight cinematic presentation layer for high-signal corridor storytelling. It keeps MapLibre as the dominant surface, dims both sidebars, reduces supporting UI clutter, and uses a compact semi-transparent story card positioned mid-left over the map. The guided five-step sequence is:
-- Texas context.
-- Corridor focus.
-- Signal identification.
+- Texas electrification context.
+- BESS as early signal.
+- 345kV corridor validation.
 - Parcel narrowing.
-- Ownership insight.
+- Ownership / executable deal path.
 
-Each step includes a step indicator, narrative copy, a `Why This Matters` section, Back/Next/Exit controls, and at most one or two high-contrast annotations such as “BESS interconnection signal,” “345kV transmission access,” or “single-owner opportunity.” Step transitions use longer MapLibre fit durations for a smoother guided feel.
+Each step answers what the viewer is seeing, why it matters, and what action it implies. The copy now uses stronger commercial language such as pre-headline signal, transmission-proven corridor, screened parcel universe, actionable ownership, and diligence-ready opportunity. Step transitions use longer MapLibre fit durations for a smoother guided feel.
 
 The mode reuses existing map actions and data rather than introducing a separate tour engine. Layer emphasis is handled with simple active/contextual/dimmed opacity weights by step. The annotations are presentation labels, not persisted geographic features.
 
@@ -83,9 +105,11 @@ Insight Mode is best used for client demos and Substack-style narrative screensh
 
 ## Report Standard
 Client reports should follow this structure across corridors:
-- Executive summary and infrastructure signal.
+- Executive summary and pre-headline deal signal.
+- "Why this corridor matters now."
 - Corridor, lead indicator, and client action.
 - Investment thesis separated from data confidence.
+- Clear next action: verify owner, confirm POI, begin outreach sequencing.
 - Metrics for screened upside, primary queue signal, voltage, and parcel focus.
 - Parcel screen with owner, score, acreage, proximity, estimated upside, source, flood flag, and queue action.
 - Risk and mitigation with evidence standard.
@@ -155,8 +179,9 @@ Keep the pipeline lightweight until backend automation is justified:
 5. Refresh overlays manually with scripts before client demos; automate only after three or more repeatable corridors exist.
 
 ## Next Recommended Sprint
-1. Complete Vercel hosted deployment through Git integration and run hosted Safari/Chrome QA.
-2. Conduct customer outreach with the Fort Bend/Navarro two-corridor demo.
+1. Complete Vercel hosted deployment through Git integration using the `tdubst` GitHub identity required by the Hobby-tier project, then run hosted Safari/Chrome QA.
+2. Use the upgraded Fort Bend/Navarro demo in customer outreach and listen for which phrase lands: battery tell, ownership close path, or diligence-ready parcel list.
 3. Confirm parcel data licensing language for client redistribution.
-4. Decide whether the next build sprint is customer-facing narrative polish or lightweight pipeline automation.
+4. Add a small provenance drawer or source footnote only if customers ask for source traceability during demos.
 5. Add substation points and interconnection milestone provenance only after demo feedback confirms demand.
+6. Keep backend automation out of scope until at least three repeatable corridors justify it.

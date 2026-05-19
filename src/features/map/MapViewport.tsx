@@ -218,6 +218,7 @@ const MapViewportBase = ({
 }) => {
   const [hover, setHover] = useState<MapHover | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [introVisible, setIntroVisible] = useState(true);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const parcelLookupRef = useRef(new Map<string, Parcel>());
@@ -629,12 +630,13 @@ const MapViewportBase = ({
 
   const insightSteps = [
     {
-      label: "Texas context",
-      kicker: "Begin wide",
-      annotation: "ERCOT context",
-      detail: "Start broad: the platform frames ERCOT signals inside statewide grid context.",
-      why: "Clients need to see this as an infrastructure search problem, not a parcel search problem.",
-      annotations: ["ERCOT context"],
+      label: "Texas electrification context",
+      kicker: "What are we seeing?",
+      annotation: "ERCOT demand pressure",
+      detail: "Start broad: electrification and private load growth are changing where transmission-adjacent land becomes strategic.",
+      why: "The buyer needs to see this as infrastructure intelligence first, not a generic parcel search.",
+      implication: "Action: open the map at grid scale, then look for early storage signals.",
+      annotations: ["ERCOT demand pressure"],
       action: () => {
         const map = mapRef.current;
         store.setMapScope("texas");
@@ -643,39 +645,43 @@ const MapViewportBase = ({
       },
     },
     {
-      label: "Corridor focus",
-      kicker: "Find the corridor",
-      annotation: "345kV transmission access",
-      detail: "Narrow the view to transmission proximity and corridor structure.",
-      why: "High-voltage proximity turns a county map into a power-siting thesis.",
-      annotations: ["345kV transmission access", "corridor structure"],
-      action: fitCinematicCorridor,
-    },
-    {
-      label: "Signal identification",
-      kicker: "Spot the tell",
-      annotation: "BESS interconnection signal",
-      detail: "Use the storage queue marker as the lead indicator before broader market attention.",
-      why: "A storage interconnection can reveal where load-serving infrastructure may become valuable before headlines appear.",
-      annotations: ["BESS interconnection signal"],
+      label: "BESS as early signal",
+      kicker: "Pre-headline signal",
+      annotation: "BESS / storage queue",
+      detail: "The storage queue marks where developers are already underwriting grid optionality before broader demand becomes visible.",
+      why: "Battery tells you where: it is the lead indicator for a corridor worth screening.",
+      implication: "Action: use BESS as the first filter, not the final answer.",
+      annotations: ["BESS / storage queue"],
       action: fitCinematicSignal,
     },
     {
+      label: "345kV corridor validation",
+      kicker: "Transmission-proven corridor",
+      annotation: "345kV corridor validation",
+      detail: "The signal becomes investable when it sits inside a high-voltage corridor with credible delivery context.",
+      why: "Transmission context separates directional interest from infrastructure-backed conviction.",
+      implication: "Action: validate the corridor before spending diligence time on individual parcels.",
+      annotations: ["345kV corridor validation", "delivery context"],
+      action: fitCinematicCorridor,
+    },
+    {
       label: "Parcel narrowing",
-      kicker: "Narrow the field",
-      annotation: "candidate parcel cluster",
-      detail: "Zoom into screened parcels where acreage, flood risk, and grid distance begin to matter.",
-      why: "The investable surface is the overlap between grid access, buildability, acreage, and timing.",
-      annotations: ["candidate parcel cluster", "buildability screen"],
+      kicker: "Screened parcel universe",
+      annotation: "screened parcel universe",
+      detail: "The map narrows 170 screened parcels into candidates with acreage, proximity, flood exposure, score, and upside.",
+      why: "The investable surface is the overlap between grid access, buildability, acreage, risk, and timing.",
+      implication: "Action: move from corridor conviction to a ranked parcel list.",
+      annotations: ["screened parcel universe", "FEMA flood screen"],
       action: zoomToCinematicParcels,
     },
     {
-      label: "Ownership insight",
-      kicker: "Translate to action",
-      annotation: "single-owner opportunity",
-      detail: "Translate map geometry into diligence: owner concentration, score, and estimated upside.",
-      why: "Ownership concentration separates a signal from an executable deal path.",
-      annotations: ["single-owner opportunity"],
+      label: "Ownership / executable deal path",
+      kicker: "Actionable ownership",
+      annotation: "diligence-ready opportunity",
+      detail: "Owner/entity enrichment turns the best parcels into tracked diligence items with notes, readiness, and outreach priority.",
+      why: "Ownership tells you whether you can close: it converts a map signal into an executable deal path.",
+      implication: "Action: verify owner, confirm POI, begin outreach sequencing.",
+      annotations: ["diligence-ready opportunity"],
       action: zoomToCinematicParcels,
     },
   ];
@@ -688,12 +694,23 @@ const MapViewportBase = ({
     insightSteps[nextStep].action();
   };
 
+  const startInsightMode = () => {
+    setIntroVisible(false);
+    runInsightStep(0);
+  };
+
+  const exploreBatteryTell = () => {
+    setIntroVisible(false);
+    store.setSelectedOpportunityId("fort-bend-corridor");
+    window.setTimeout(() => fitCinematicSignal(), 80);
+  };
+
   const demoSteps = [
-    { label: "Texas context", detail: "Open with the statewide grid lens.", action: fitTexas },
-    { label: "Fort Bend signal", detail: "Zoom into the 345kV+BESS tell.", action: () => store.setSelectedOpportunityId("fort-bend-corridor") },
-    { label: "Parcel reveal", detail: "Show owner, acreage, score, and upside.", action: zoomToParcels },
-    { label: "Navarro repeat", detail: "Switch to the second corridor proof point.", action: () => store.setSelectedOpportunityId("navarro-corsicana-corridor") },
-    { label: "Portfolio view", detail: "Return to both opportunities together.", action: fitAllOpportunities },
+    { label: "Texas context", detail: "What are we seeing? Electrification pressure at grid scale.", action: fitTexas },
+    { label: "Battery tell", detail: "Why it matters: BESS is the pre-headline signal.", action: () => store.setSelectedOpportunityId("fort-bend-corridor") },
+    { label: "Corridor validation", detail: "Confirm the 345kV delivery context before parcel work.", action: fitSelectedCorridor },
+    { label: "Parcel narrowing", detail: "Screen acreage, flood risk, score, and upside.", action: zoomToParcels },
+    { label: "Ownership path", detail: "Move from signal to owner/outreach action.", action: () => store.setInsightMode(true) },
   ];
 
   return (
@@ -702,6 +719,7 @@ const MapViewportBase = ({
         <div>
           <span className="eyebrow">Map-first intelligence</span>
           <h1>{store.selectedOpportunity.title}</h1>
+          <p>Signal {"->"} Corridor {"->"} Parcel {"->"} Ownership {"->"} Action</p>
         </div>
         <div className="map-navigation">
           <button
@@ -726,6 +744,25 @@ const MapViewportBase = ({
         <div className="maplibre-stage" ref={mapContainerRef} />
       </div>
       <HoverPanel hover={hover} />
+      {introVisible && !store.insightMode ? (
+        <section className="map-intro-panel">
+          <span className="eyebrow">Live demo</span>
+          <h2>Find pre-headline infrastructure opportunities before the market sees them.</h2>
+          <p>Battery tells you where. Ownership tells you whether you can close.</p>
+          <div className="intro-proof-grid">
+            <span><strong>2</strong> corridors analyzed</span>
+            <span><strong>170</strong> parcels screened</span>
+            <span><strong>345kV</strong> transmission proximity</span>
+            <span><strong>FEMA</strong> flood risk</span>
+            <span><strong>Owner</strong> entity enrichment</span>
+            <span><strong>Queue</strong> diligence workflow</span>
+          </div>
+          <div className="map-intro-actions">
+            <button className="primary-button" onClick={startInsightMode}>Start Insight Mode</button>
+            <button className="ghost-button" onClick={exploreBatteryTell}>Explore the Battery Tell</button>
+          </div>
+        </section>
+      ) : null}
       {store.insightMode ? (
         <>
           <div className="insight-annotations" key={`annotations-${store.insightStep}`}>
@@ -746,6 +783,10 @@ const MapViewportBase = ({
             <div className="insight-why">
               <span>Why This Matters</span>
               <p>{activeInsightStep.why}</p>
+            </div>
+            <div className="insight-why insight-action-line">
+              <span>Implied Action</span>
+              <p>{activeInsightStep.implication}</p>
             </div>
             <div className="insight-step-dots" aria-label="Insight step selector">
               {insightSteps.map((step, index) => (

@@ -38,11 +38,23 @@ export const renderOpportunityReport = (opportunity: Opportunity, parcels: Parce
     .join("\n");
   return `# ${opportunity.title}
 
-## Thesis
+## Executive Summary
+Battery tells you where. Ownership tells you whether you can close.
+
 ${opportunity.thesis}
 
-## Signal
-${opportunity.leadIndicator}. ${opportunity.timelineMonths}-month lead indicator.
+## Why This Corridor Matters Now
+${opportunity.leadIndicator}. The signal is strongest when BESS/storage activity, 345kV transmission proximity, parcel scale, flood risk, and owner/entity diligence converge before headline demand reprices the corridor.
+
+## Signal Stack
+- Signal: BESS / storage queue activity.
+- Corridor: transmission-proven 345kV context.
+- Parcel: screened parcel universe with acreage, proximity, flood risk, and upside.
+- Ownership: owner/entity enrichment and call complexity.
+- Action: diligence-ready owner/outreach workflow.
+
+## Investment Thesis
+Convert queue intelligence into owner-verified land-control diligence before the broader market prices the corridor.
 
 ## Estimated Value
 $${opportunity.valueCreationM}M screening value creation.
@@ -53,10 +65,14 @@ ${parcelLines || "- Parcel layer pending for this corridor."}
 ## Risks
 ${opportunity.risks.map((risk) => `- ${risk}`).join("\n")}
 
+## Risk / Mitigation
+Validate through source refresh, POI confirmation, owner outreach, FEMA NFHL flood review, and interconnection milestone monitoring.
+
 ## Source Standard
-Parcel, flood, and transmission overlays preserve source names, fetch dates, and generated JSON outputs for client diligence traceability.
+Parcel, flood, transmission, and owner/entity overlays preserve source names, fetch dates, and generated JSON outputs for client diligence traceability.
 
 ## Next Actions
+- Verify owner, confirm POI, begin outreach sequencing.
 ${opportunity.nextActions.map((action) => `- ${action}`).join("\n")}
 `;
 };
