@@ -5,6 +5,7 @@ import { exportParcels, renderOpportunityReport } from "../../services/csvExport
 import { formatMoney, formatMw } from "../../services/formatters";
 import type { DealFlowStore } from "../../store/useDealFlowStore";
 import type { Parcel } from "../../types";
+import { AskDatasetPanel } from "../ai/AskDatasetPanel";
 
 export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; parcels: Parcel[] }) => {
   const [open, setOpen] = useState<Record<string, boolean>>({ narrative: true, parcels: true, workflow: true });
@@ -92,6 +93,8 @@ export const RightReportPanel = ({ store, parcels }: { store: DealFlowStore; par
           <MetricBlock label="Parcel focus" value={topParcel ? `${topParcel.acres.toFixed(0)} ac` : "Pending"} />
         </div>
       </PanelCard>
+
+      <AskDatasetPanel store={store} parcels={parcels} />
 
       <section className="accordion">
         <button onClick={() => toggle("narrative")}>Narrative Deal Page</button>

@@ -747,20 +747,31 @@ const MapViewportBase = ({
       {introVisible && !store.insightMode ? (
         <section className="map-intro-panel">
           <span className="eyebrow">Live demo</span>
-          <h2>Find pre-headline infrastructure opportunities before the market sees them.</h2>
+          <h2>Track where large-scale energy and data center deals will land before the market does.</h2>
           <p>Battery tells you where. Ownership tells you whether you can close.</p>
-          <div className="intro-proof-grid">
-            <span><strong>2</strong> corridors analyzed</span>
-            <span><strong>170</strong> parcels screened</span>
-            <span><strong>345kV</strong> transmission proximity</span>
-            <span><strong>FEMA</strong> flood risk</span>
-            <span><strong>Owner</strong> entity enrichment</span>
-            <span><strong>Queue</strong> diligence workflow</span>
+          <div className="pattern-block">
+            <span>Example pattern</span>
+            <strong>BESS filing {"->"} 33 months {"->"} 520-acre data center MOU</strong>
+            <small>This platform identifies that signal earlier.</small>
           </div>
+          <div className="time-advantage">
+            <span>Manual broker workflow: weeks</span>
+            <strong>Signal-driven screening: seconds</strong>
+          </div>
+          <div className="intro-proof-grid">
+            <span><strong>2</strong> corridors tracked</span>
+            <span><strong>170</strong> parcels screened</span>
+            <span><strong>345kV</strong> transmission validated</span>
+            <span><strong>Owner</strong> diligence ready</span>
+            <span><strong>FEMA</strong> risk screened</span>
+            <span><strong>AI</strong> dataset assistant</span>
+          </div>
+          <p className="built-for-line">Built for infrastructure investors, data center developers, and land aggregators.</p>
           <div className="map-intro-actions">
             <button className="primary-button" onClick={startInsightMode}>Start Insight Mode</button>
             <button className="ghost-button" onClick={exploreBatteryTell}>Explore the Battery Tell</button>
           </div>
+          <small className="intro-urgency">Window closes once infrastructure is announced.</small>
         </section>
       ) : null}
       {store.insightMode ? (

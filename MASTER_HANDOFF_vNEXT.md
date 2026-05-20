@@ -26,24 +26,74 @@ The commercial message is targeted at infrastructure investors, data-center deve
 
 ## Live Demo Intro
 The map now opens with a lightweight premium intro panel:
-- "Find pre-headline infrastructure opportunities before the market sees them."
-- 2 corridors analyzed.
+- "Track where large-scale energy and data center deals will land before the market does."
+- Static outcome anchor: "BESS filing -> 33 months -> 520-acre data center MOU."
+- Time advantage: "Manual broker workflow: weeks" vs. "Signal-driven screening: seconds."
+- Audience line: built for infrastructure investors, data center developers, and land aggregators.
+- Urgency line: "Window closes once infrastructure is announced."
+- 2 corridors tracked.
 - 170 parcels screened.
-- 345kV transmission proximity.
-- FEMA flood risk.
-- Owner/entity enrichment.
-- Diligence queue workflow.
+- 345kV transmission validated.
+- FEMA risk screened.
+- Owner diligence ready.
+- AI dataset assistant.
 
 Primary CTAs are "Start Insight Mode" and "Explore the Battery Tell." The left rail also includes a compact Signal Stack / Deal Stack card so a viewer can understand the product in under 60 seconds.
+
+## Ask the Dataset Architecture
+The demo now includes a lightweight AI-assisted diligence panel in the right report rail. It is designed as an MVP exploration layer, not a full data platform:
+
+- Frontend UI: `src/features/ai/AskDatasetPanel.tsx`.
+- Serverless API: `api/ask-dataset.js`.
+- Runtime: Vercel Serverless Function.
+- Model provider: OpenAI Responses API.
+- Required env var: `OPENAI_API_KEY`.
+- Optional env var: `OPENAI_MODEL`.
+- Default model: `gpt-4.1-mini`.
+- No database.
+- No authentication.
+- No vector database.
+- No RAG pipeline.
+- No backend persistence.
+
+The frontend packages compact context only:
+- selected corridor
+- corridor thesis/report summary
+- top parcel scores, acres, owner/entity fields, flood risk, proximity, and screened upside
+- selected corridor diligence queue items
+- opportunity risk list
+- FEMA NFHL / HIFLD 230kV+ metadata labels
+- top opportunity summaries
+
+The frontend does not send raw GeoJSON, polygon coordinates, full overlay files, basemap state, or large geometry payloads.
+
+If `OPENAI_API_KEY` is missing or the local preview has no API route available, the UI falls back to demo-mode answers generated from loaded frontend context. Demo mode is intentionally labeled so customers can distinguish it from live AI.
+
+## AI Answer Rules
+The server prompt instructs the model to:
+- answer only from provided compact context
+- distinguish facts from inference
+- avoid fabricated parcels, owners, sources, or values
+- avoid investment-advice framing
+- state missing data clearly
+- frame outputs as diligence support
+- reinforce Signal -> Corridor -> Parcel -> Ownership -> Action where useful
+
+## AI Limitations
+- The AI cannot inspect map geometry beyond the compact parcel fields provided.
+- It cannot verify live owner contact data or POI deliverability.
+- It cannot access external data unless that data is already included in the supplied context.
+- Demo-mode answers are deterministic local summaries, not model-generated analysis.
+- Hosted live AI requires `OPENAI_API_KEY` in Vercel project environment variables.
 
 ## Second Corridor Summary
 Navarro / Corsicana is now a complete second ERCOT corridor example with live CAD parcel candidates, owner/entity enrichment from parcel attributes, FEMA flood overlay support, HIFLD transmission context, score parity, report parity, and queue parity. It demonstrates repeatability beyond the Fort Bend demo.
 
 ## Deployment Readiness
-`npm run build` passes and outputs a production bundle. Vite remains configured with relative assets for Vercel/static hosting. Production preview rendered successfully at `http://127.0.0.1:4174/`. Vercel MCP returned CLI/Git instructions rather than creating a hosted URL, and `npx vercel deploy --yes` failed from this environment because `registry.npmjs.org` could not be resolved. Use Vercel Git integration for the shareable external URL.
+`npm run build` passes and outputs a production bundle. Vite remains configured with relative assets for Vercel/static hosting. The AI endpoint is a lightweight Vercel serverless function under `api/ask-dataset.js`. Use Vercel Git integration for the shareable external URL. Configure `OPENAI_API_KEY` for live Ask the Dataset responses; without it, the app remains usable in demo mode.
 
 ## Performance Considerations
-Main JS is roughly 223.86 KB after adding direct FEMA, Navarro overlays, and hover stabilization. The next performance step is data-level tiling or corridor-specific overlay loading once additional counties are added.
+Main app JS remains lightweight relative to the MapLibre vendor chunk. The Ask the Dataset feature sends compact structured context only and excludes raw geometry, so it should not slow map rendering. The next performance step is data-level tiling or corridor-specific overlay loading once additional counties are added.
 
 ## Interaction Model
 Map rendering order is now fixed as basemap, flood/risk overlays, transmission/corridor overlays, parcel overlays, project markers, then hover tooltip. MapLibre handles drag-to-pan, scroll/trackpad zoom, double-click zoom, and touch zoom. Hover state still uses the typed `MapHover` union, but events now come from MapLibre feature layers instead of SVG hitboxes.
@@ -160,11 +210,15 @@ Do not commit credentials. Do not add Vercel tokens, GitHub tokens, `.env*`, or 
 Run once a preview or production URL exists:
 - App loads without console errors.
 - Overlay JSON files load from `/overlays/*.json`.
+- `/api/ask-dataset` returns a live answer when `OPENAI_API_KEY` is set.
+- Ask the Dataset gracefully shows demo/disabled behavior when `OPENAI_API_KEY` is absent.
 - CARTO/OpenStreetMap basemap tiles load.
 - MapLibre drag/pan, scroll zoom, Fit Texas, Fit All, Fit Corridor, and Parcels controls work.
 - Fort Bend and Navarro/Corsicana corridors load.
 - Layer controls and hover cards work.
 - Insight Mode opens, advances, goes back, and exits cleanly.
+- Conviction Layer headline, outcome anchor, time-advantage copy, and CTA render in the intro panel.
+- Ask the Dataset suggested prompts and answer cards render.
 - Reports render correctly.
 - Diligence queue works.
 - CSV exports work where browser permissions allow.
@@ -180,8 +234,10 @@ Keep the pipeline lightweight until backend automation is justified:
 
 ## Next Recommended Sprint
 1. Complete Vercel hosted deployment through Git integration using the `tdubst` GitHub identity required by the Hobby-tier project, then run hosted Safari/Chrome QA.
-2. Use the upgraded Fort Bend/Navarro demo in customer outreach and listen for which phrase lands: battery tell, ownership close path, or diligence-ready parcel list.
-3. Confirm parcel data licensing language for client redistribution.
-4. Add a small provenance drawer or source footnote only if customers ask for source traceability during demos.
-5. Add substation points and interconnection milestone provenance only after demo feedback confirms demand.
-6. Keep backend automation out of scope until at least three repeatable corridors justify it.
+2. Add `OPENAI_API_KEY` to Vercel and verify live Ask the Dataset responses.
+3. Use the upgraded Fort Bend/Navarro demo in customer outreach and listen for which phrase lands: battery tell, ownership close path, diligence-ready parcel list, or Ask the Dataset.
+4. Confirm parcel data licensing language for client redistribution.
+5. Add a small provenance drawer or source footnote only if customers ask for source traceability during demos.
+6. Add substation points and interconnection milestone provenance only after demo feedback confirms demand.
+7. Future AI roadmap: saved Q&A snippets, report-section drafting, source-citation chips, and structured owner-call recommendations. Avoid vector DB/RAG until the dataset grows beyond static corridor context.
+8. Keep backend automation out of scope until at least three repeatable corridors justify it.

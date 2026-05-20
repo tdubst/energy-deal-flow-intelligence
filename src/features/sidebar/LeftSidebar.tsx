@@ -20,13 +20,14 @@ export const LeftSidebar = ({ store }: { store: DealFlowStore }) => {
 
       <section className="intro-card">
         <span className="eyebrow">Live demo thesis</span>
-        <h2>Find pre-headline infrastructure opportunities before the market sees them.</h2>
+        <h2>Track where large-scale energy and data center deals will land before the market does.</h2>
         <p>Signal {"->"} Corridor {"->"} Parcel {"->"} Ownership {"->"} Action.</p>
+        <p className="intro-urgency">Signals appear months before public announcements.</p>
         <div className="intro-metrics">
-          <span><strong>2</strong> corridors analyzed</span>
+          <span><strong>2</strong> corridors tracked</span>
           <span><strong>170</strong> parcels screened</span>
-          <span><strong>345kV</strong> transmission proximity</span>
-          <span><strong>FEMA</strong> flood risk</span>
+          <span><strong>345kV</strong> transmission validated</span>
+          <span><strong>Owner</strong> diligence ready</span>
         </div>
         <button className="primary-button" onClick={() => store.setInsightMode(true)}>Start Insight Mode</button>
       </section>
@@ -43,10 +44,10 @@ export const LeftSidebar = ({ store }: { store: DealFlowStore }) => {
         <div className="deal-stack-grid">
           <span>Corridors tracked <strong>2</strong></span>
           <span>Parcels screened <strong>170</strong></span>
-          <span>Flood overlay <strong>FEMA NFHL</strong></span>
-          <span>Transmission context <strong>HIFLD 230kV+</strong></span>
+          <span>Transmission validated <strong>HIFLD 230kV+</strong></span>
+          <span>Ownership ready <strong>Owner/entity</strong></span>
           <span>Queue signal <strong>BESS / storage</strong></span>
-          <span>Workflow output <strong>Parcel list</strong></span>
+          <span>Diligence output <strong>Owner call list</strong></span>
         </div>
       </section>
 

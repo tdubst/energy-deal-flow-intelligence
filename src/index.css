@@ -239,6 +239,17 @@ li {
   line-height: 1.45;
 }
 
+.intro-urgency,
+.built-for-line {
+  color: #fbbf24;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.built-for-line {
+  color: #94a3b8;
+}
+
 .intro-metrics,
 .intro-proof-grid,
 .deal-stack-grid {
@@ -869,6 +880,43 @@ textarea {
   line-height: 1.5;
 }
 
+.pattern-block,
+.time-advantage {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.07);
+}
+
+.pattern-block span,
+.time-advantage span {
+  color: #fbbf24;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pattern-block strong,
+.time-advantage strong {
+  color: #f8fafc;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.pattern-block small {
+  color: #cbd5e1;
+  line-height: 1.35;
+}
+
+.time-advantage {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border-color: rgba(45, 212, 191, 0.18);
+  background: rgba(20, 184, 166, 0.055);
+}
+
 .map-intro-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1246,6 +1294,84 @@ textarea {
   padding: 10px;
   border: 1px solid rgba(148, 163, 184, 0.14);
   background: rgba(15, 23, 42, 0.38);
+}
+
+.ask-dataset-panel {
+  display: grid;
+  gap: 11px;
+  padding: 12px;
+  border: 1px solid rgba(45, 212, 191, 0.22);
+  background: linear-gradient(180deg, rgba(20, 184, 166, 0.08), rgba(15, 23, 42, 0.38));
+}
+
+.ask-dataset-panel p,
+.ask-dataset-panel small {
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.ask-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ask-suggestions button {
+  min-height: 27px;
+  padding: 0 8px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: #dbeafe;
+  background: rgba(15, 23, 42, 0.62);
+  font-size: 11px;
+}
+
+.ask-suggestions button:hover:not(:disabled) {
+  border-color: rgba(45, 212, 191, 0.44);
+  background: rgba(20, 184, 166, 0.1);
+}
+
+.ask-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.ask-input-row textarea {
+  min-height: 76px;
+}
+
+.ask-answer {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(4, 12, 17, 0.52);
+}
+
+.ask-answer span {
+  color: #2dd4bf;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ask-answer--demo span {
+  color: #fbbf24;
+}
+
+.ask-answer--error {
+  border-color: rgba(251, 113, 133, 0.28);
+}
+
+.ask-answer--error span {
+  color: #fb7185;
+}
+
+.ask-answer p {
+  white-space: pre-wrap;
 }
 
 @media print {
